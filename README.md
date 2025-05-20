@@ -3,9 +3,14 @@
 
 In this demo, we will demostrate how you can deploy 2 tier application into OpenShift using 2 different projects/namespaces/tenant then test the application to identify the default behaviour (depending on OpenShift version), then deny all traffic, test it one more time, finally permit the traffic from that particular application to the DB (MySQL) and test it.
 
+The demo is using the Quarkus sample application: https://github.com/osa-ora/Loyalty-Service
+
+<img width="603" alt="Screenshot 2025-05-20 at 6 12 44 PM" src="https://github.com/user-attachments/assets/d95b3ad2-fb23-4a7d-94e2-0456a6be34ce" />
+
+
 ## Deploy the DB Tier
 
-We will deploy it to the namespace db-project ..
+We will deploy it to the namespace "db-project" ..
 
 ```
 oc new-project db-project
@@ -20,7 +25,7 @@ oc patch dc loyaltymysql -n db-project --type='json' -p='[
 ]'
 ```
 
-Once it is up and running, install the DB schedma for our application:
+Once it is up and running, install the DB schema for our application:
 
 ```
 //once the POD up and running ...
@@ -32,7 +37,7 @@ oc exec $POD_NAME -- mysql -u root loyalty -e "CREATE TABLE loyalty.loyalty_acco
 
 ## Deploy the Application Tier
 
-We will deploy it to the namespace app-project ..
+We will deploy it to the namespace "app-project" ..
 
 ```
 oc new-project app-project
