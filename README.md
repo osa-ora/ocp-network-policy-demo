@@ -70,7 +70,7 @@ Second Test Case: The Deny All Policy Behaviour
 
 ```
 //with deny all ..
-oc apply -f https://raw.githubusercontent.com/osa-ora/Loyalty-Service/refs/heads/master/np/deny-all.yaml -n db-project
+oc apply -f https://raw.githubusercontent.com/osa-ora/ocp-network-policy-demo/refs/heads/main/policies/deny-all.yaml -n db-project
 oc rollout restart deployment quarkus-loyalty-java -n app-project
 
 curl -s $(oc get route quarkus-loyalty-java -n app-project -o jsonpath='{.spec.host}')/loyalty/v1/balance/1
@@ -80,7 +80,7 @@ Third Test Case: The Deny All Policy & Permit Application Specific Flow Behaviou
 
 ```
 //with permit app to db only ..
-oc apply -f https://raw.githubusercontent.com/osa-ora/Loyalty-Service/refs/heads/master/np/policy.yaml -n db-project
+oc apply -f https://raw.githubusercontent.com/osa-ora/ocp-network-policy-demo/refs/heads/main/policies/permit-policy.yaml -n db-project
 oc rollout restart deployment quarkus-loyalty-java -n app-project
 
 curl -s $(oc get route quarkus-loyalty-java -n app-project -o jsonpath='{.spec.host}')/loyalty/v1/balance/1
